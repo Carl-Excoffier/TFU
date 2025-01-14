@@ -73,7 +73,7 @@ namespace Launch
                 try
                 {
                     WebClient webClient = new WebClient();
-                    Version onlineVersion = new Version(webClient.DownloadString("https://raw.githubusercontent.com/Carl-Excoffier/TFU/refs/heads/main/Version.txt"));
+                    Version onlineVersion = new Version(webClient.DownloadString("Online version file"));
                     if (onlineVersion.IsDifferentThan(localVersion))
                     {
                         InstallGameFiles(true, onlineVersion);
@@ -107,11 +107,11 @@ namespace Launch
                 else
                 {
                     Status = LauncherStatus.downloadingGame;
-                    _onlineVersion = new Version(webClient.DownloadString("https://raw.githubusercontent.com/Carl-Excoffier/TFU/refs/heads/main/Version.txt"));
+                    _onlineVersion = new Version(webClient.DownloadString("Online version file"));
                 }
 
                 webClient.DownloadFileCompleted += new AsyncCompletedEventHandler(DownloadGameCompletedCallback);
-                webClient.DownloadFileAsync(new Uri("https://drive.google.com/uc?export=download&id=1SNA_3P5wVp4tZi5NKhiGAAD6q4ilbaaf"), gameZip, _onlineVersion);
+                webClient.DownloadFileAsync(new Uri("Game Files link"), gameZip, _onlineVersion);
             }
             catch (Exception ex)
             {
